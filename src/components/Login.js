@@ -8,18 +8,17 @@ import axios from "axios";
 
 // import { render } from "node-sass";
   const Login = () => {
-    const [form, setForm] = useState({ name: '', password: '' });
-    const update = (({ target }) => setForm({ ...form, [target.name]: target.value }));
-    handleSubmit(event) {
+    const [form, setForm] = useState({ username: '', password: '' });
+    const update = (({ target }) => setForm({ ...form, [target.username]: target.value }));
+
+    const handleSubmit = (event) => {
       event.preventDefault();
        axios
        .post('/oauth/token', {
-
-
        })
        .then(res => localStorage.setItem('stuff', res.data))
        .catch((error) => {
-         //return  error;
+         return error.message;
        });
     }
     return (

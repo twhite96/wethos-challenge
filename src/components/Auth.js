@@ -4,8 +4,7 @@ import axios from 'axios';
 
 function Auth (props) {
   const [user, setUser] = useState(undefined);
-
-  useEffect(() => {
+  function getUser() {
     const token = getToken();
     if(!token ) {
       props.history.push('/login');
@@ -22,11 +21,15 @@ function Auth (props) {
       },
       Accept: "application/json",
       "Content-Type": "application/json"
+      // scope issue here; setUser and user aren't being initialized
     }).then(res => res.setUser({user: res.data
     })).catch(err => {
       props.history.push('/login');
     })
-  })
+  }
+  useEffect(() => {
+    getUser();
+  }, [])
   return (
     <div>{this.props.children}</div>
   )
